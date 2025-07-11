@@ -3,6 +3,7 @@
 --disable andOperator
 --disable enumNamespaces
 --disable numberFormatting
+--disable trailingCommas
 
 --ifdef noindent
 --indentcase true
