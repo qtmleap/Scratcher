@@ -17,7 +17,7 @@ extension Array: @retroactive RawRepresentable where Element: Codable {
     /// - Returns: 復元されたArray、失敗時はnil
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),
-              let result = try? JSONDecoder().decode([Element].self, from: data)
+            let result = try? JSONDecoder().decode([Element].self, from: data)
         else {
             return nil
         }

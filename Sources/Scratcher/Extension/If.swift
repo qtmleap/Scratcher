@@ -15,10 +15,9 @@ import SwiftUI
 /// - Returns: 変換後のView
 extension View {
     func `if`(_ condition: Bool, transform: (Self) -> some View) -> some View {
-        if condition {
-            return AnyView(transform(self))
-        } else {
+        guard condition else {
             return AnyView(self)
         }
+        return AnyView(transform(self))
     }
 }

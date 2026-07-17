@@ -26,35 +26,35 @@ public enum ButtonVariant {
 
     public func foregroundColor(configuration: ButtonStyleConfiguration) -> Color {
         switch self {
-            case .default:
-                Shadcn.primaryForeground
-            case .destructive:
-                Shadcn.destructiveForeground
-            case .outline:
-                Shadcn.accentForeground
-            case .secondary:
-                Shadcn.secondaryForeground
-            case .ghost:
-                configuration.isPressed ? Shadcn.accentForeground : Shadcn.primary
-            case .link:
-                Shadcn.primary
+        case .default:
+            Shadcn.primaryForeground
+        case .destructive:
+            Shadcn.destructiveForeground
+        case .outline:
+            Shadcn.accentForeground
+        case .secondary:
+            Shadcn.secondaryForeground
+        case .ghost:
+            configuration.isPressed ? Shadcn.accentForeground : Shadcn.primary
+        case .link:
+            Shadcn.primary
         }
     }
 
     public func backgroundColor(configuration: ButtonStyleConfiguration) -> Color {
         switch self {
-            case .default:
-                Shadcn.primary.opacity(configuration.isPressed ? 0.8 : 1.0)
-            case .destructive:
-                Shadcn.destructive
-            case .outline:
-                configuration.isPressed ? Shadcn.accent : Shadcn.background
-            case .secondary:
-                Shadcn.secondary.opacity(configuration.isPressed ? 0.8 : 1.0)
-            case .ghost:
-                configuration.isPressed ? Shadcn.accent : .clear
-            case .link:
-                .clear
+        case .default:
+            Shadcn.primary.opacity(configuration.isPressed ? 0.8 : 1.0)
+        case .destructive:
+            Shadcn.destructive
+        case .outline:
+            configuration.isPressed ? Shadcn.accent : Shadcn.background
+        case .secondary:
+            Shadcn.secondary.opacity(configuration.isPressed ? 0.8 : 1.0)
+        case .ghost:
+            configuration.isPressed ? Shadcn.accent : .clear
+        case .link:
+            .clear
         }
     }
 }
@@ -73,52 +73,52 @@ public enum ButtonSize {
     /// ボタンのフォントを返すプロパティだよ
     public var font: Font {
         switch self {
-            case .default:
-                .system(size: 14, weight: .medium)
-            case .small:
-                .system(size: 12, weight: .medium)
-            case .large:
-                .system(size: 16, weight: .medium)
-            case .icon:
-                .system(size: 20, weight: .medium)
+        case .default:
+            .system(size: 14, weight: .medium)
+        case .small:
+            .system(size: 12, weight: .medium)
+        case .large:
+            .system(size: 16, weight: .medium)
+        case .icon:
+            .system(size: 20, weight: .medium)
         }
     }
 
     /// ボタンのパディングを返すプロパティだよ
     public var padding: EdgeInsets {
         switch self {
-            case .default:
-                .init(top: 8, leading: 16, bottom: 8, trailing: 16)
-            case .small:
-                .init(top: 0, leading: 12, bottom: 0, trailing: 12)
-            case .large:
-                .init(top: 0, leading: 32, bottom: 0, trailing: 32)
-            case .icon:
-                .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+        case .default:
+            .init(top: 8, leading: 16, bottom: 8, trailing: 16)
+        case .small:
+            .init(top: 0, leading: 12, bottom: 0, trailing: 12)
+        case .large:
+            .init(top: 0, leading: 32, bottom: 0, trailing: 32)
+        case .icon:
+            .init(top: 0, leading: 0, bottom: 0, trailing: 0)
         }
     }
 
     /// ボタンの最小高さを返すプロパティだよ
     public var height: CGFloat {
         switch self {
-            case .default:
-                36
-            case .small:
-                32
-            case .large:
-                40
-            case .icon:
-                36
+        case .default:
+            36
+        case .small:
+            32
+        case .large:
+            40
+        case .icon:
+            36
         }
     }
 
     /// ボタンの角丸を返すプロパティだよ
     public var cornerRadius: CGFloat {
         switch self {
-            case .default, .small, .large:
-                6
-            case .icon:
-                0
+        case .default, .small, .large:
+            6
+        case .icon:
+            0
         }
     }
 }
@@ -152,7 +152,9 @@ public struct ShadcnButtonStyle: ButtonStyle {
             .opacity(configuration.isPressed ? 0.8 : 1.0)
             .cornerRadius(size.cornerRadius)
             .if(variant == .outline) { view in
-                view.overlay(RoundedRectangle(cornerRadius: size.cornerRadius).stroke(Shadcn.input, lineWidth: 1.5))
+                view.overlay(
+                    RoundedRectangle(cornerRadius: size.cornerRadius).stroke(
+                        Shadcn.input, lineWidth: 1.5))
             }
             .if(variant == .link) { view in
                 view.underline()
@@ -160,9 +162,9 @@ public struct ShadcnButtonStyle: ButtonStyle {
     }
 }
 
-public extension ButtonStyle where Self == ShadcnButtonStyle {
+extension ButtonStyle where Self == ShadcnButtonStyle {
     /// ShadcnButtonStyleのデフォルトインスタンスを返すよ
-    static func shadcn(variant: ButtonVariant, size: ButtonSize) -> ShadcnButtonStyle {
+    public static func shadcn(variant: ButtonVariant, size: ButtonSize) -> ShadcnButtonStyle {
         .init(variant: variant, size: size)
     }
 }
@@ -181,10 +183,10 @@ public extension ButtonStyle where Self == ShadcnButtonStyle {
                 Text("")
                 ForEach(sizes, id: \.self) { size in
                     switch size {
-                        case .default: Text("Default")
-                        case .small: Text("Small")
-                        case .large: Text("Large")
-                        case .icon: Text("Icon")
+                    case .default: Text("Default")
+                    case .small: Text("Small")
+                    case .large: Text("Large")
+                    case .icon: Text("Icon")
                     }
                 }
             }
@@ -193,12 +195,12 @@ public extension ButtonStyle where Self == ShadcnButtonStyle {
                 GridRow {
                     // バリアント名
                     switch variant {
-                        case .default: Text("Default")
-                        case .destructive: Text("Destructive")
-                        case .outline: Text("Outline")
-                        case .secondary: Text("Secondary")
-                        case .ghost: Text("Ghost")
-                        case .link: Text("Link")
+                    case .default: Text("Default")
+                    case .destructive: Text("Destructive")
+                    case .outline: Text("Outline")
+                    case .secondary: Text("Secondary")
+                    case .ghost: Text("Ghost")
+                    case .link: Text("Link")
                     }
                     // 各サイズごとにボタンを並べるよ
                     ForEach(sizes, id: \.self) { size in

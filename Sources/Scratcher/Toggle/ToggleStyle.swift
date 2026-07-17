@@ -23,8 +23,8 @@ public struct ShadcnToggleStyle: ToggleStyle {
     }
 }
 
-public extension ToggleStyle where Self == ShadcnToggleStyle {
-    static var shadcn: ShadcnToggleStyle {
+extension ToggleStyle where Self == ShadcnToggleStyle {
+    public static var shadcn: ShadcnToggleStyle {
         .init()
     }
 }
