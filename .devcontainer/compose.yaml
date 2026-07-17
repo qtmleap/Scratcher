@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      # SPM build artifacts. Keeping .build on a named volume avoids
+      # crossing the macOS filesystem boundary and dramatically speeds up
+      # incremental builds.
+      - build:/home/vscode/app/.build
+      - ../:/home/vscode/app:cached
+    environment:
+      # Swift resolves the SDK from these; noble base sets them but be explicit.
+      SWIFT_INSTALL_DIR: /usr/share/swift
+    tty: true
+    stdin_open: true
+
+volumes:
+  build:
