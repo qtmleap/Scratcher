@@ -1,6 +1,6 @@
 # Scratcher
 
-SwiftUIにおけるアプリ開発を便利にするユーティリティツール
+SwiftUI におけるアプリ開発を便利にするユーティリティ集です（shadcn 風の ButtonStyle / ToggleStyle など）。
 
 ## ButtonStyle
 
